@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy 23rd Birthday ✦</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { overflow:hidden; background:#000; -webkit-tap-highlight-color:transparent; }
+#c { display:block; width:100vw; height:100vh; }
+
+/* ── INTRO ───────────────────────────────────────────── */
+#intro {
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(ellipse at 50% 40%, rgba(28,8,70,0.97) 0%, rgba(2,0,18,0.99) 100%);
+  z-index:10; overflow:hidden;
+}
+#ip {
+  position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none;
+}
+#intro-content {
+  position:relative; z-index:1;
+  max-width:660px; width:92%;
+  text-align:center; padding:2rem 1.5rem;
+  display:flex; flex-direction:column; align-items:center;
+}
+#intro-deco {
+  font-family:'Dancing Script',cursive;
+  color:rgba(210,170,255,0.38);
+  letter-spacing:14px; font-size:0.85rem;
+  margin-bottom:1.8rem;
+  animation:pulse 3.5s ease-in-out infinite;
+}
+#intro-lines {
+  width:100%;
+  margin-bottom:0.5rem;
+}
+.il {
+  font-family:'Dancing Script',cursive;
+  color:#eadcff;
+  font-size:clamp(0.88rem, 2.2vw, 1.22rem);
+  line-height:2.1;
+  text-shadow:0 0 28px rgba(190,140,255,0.58), 0 0 60px rgba(130,80,255,0.2);
+  opacity:0; transform:translateY(16px);
+  will-change:opacity,transform;
+}
+.il-gap { height:0.75em; }
+#intro-actions {
+  margin-top:2.2rem;
+  opacity:0; transform:translateY(18px);
+  will-change:opacity,transform;
+}
+#intro-btn {
+  padding:0.85rem 2.8rem;
+  background:linear-gradient(135deg,rgba(140,75,255,0.22),rgba(80,40,200,0.16));
+  border:1px solid rgba(185,135,255,0.45);
+  color:#dfd0ff;
+  font-family:'Dancing Script',cursive;
+  font-size:1.08rem; cursor:pointer; border-radius:100px;
+  letter-spacing:1px; position:relative; overflow:hidden;
+  transition:all 0.35s ease;
+}
+#intro-btn::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);
+  transform:translateX(-100%);
+  transition:transform 0.65s ease;
+}
+#intro-btn:hover::after, #intro-btn:active::after { transform:translateX(100%); }
+#intro-btn:hover, #intro-btn:active {
+  background:linear-gradient(135deg,rgba(160,95,255,0.32),rgba(110,55,220,0.26));
+  border-color:rgba(215,175,255,0.72);
+  box-shadow:0 0 38px rgba(180,130,255,0.32), 0 0 80px rgba(130,80,255,0.14);
+  transform:scale(1.05);
+}
+
+/* ── SHARED MODAL RESET ───────────────────────────────── */
+.m-overlay {
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  z-index:20;
+  background:rgba(0,0,8,0.65);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  visibility:hidden; opacity:0;
+  transition:opacity 0.32s ease, visibility 0.32s ease;
+}
+.m-overlay.show { visibility:visible; opacity:1; }
+
+/* ── X CLOSE BUTTON ──────────────────────────────────── */
+.modal-x {
+  position:absolute; top:1rem; right:1rem;
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.18);
+  color:rgba(255,255,255,0.65); font-size:1rem;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.22s ease; font-family:sans-serif;
+  line-height:1;
+}
+.modal-x:hover, .modal-x:active {
+  background:rgba(255,255,255,0.16);
+  color:#fff; border-color:rgba(255,255,255,0.42);
+  transform:scale(1.12);
+}
+
+/* ── REASON MODAL ────────────────────────────────────── */
+#modal-box {
+  position:relative;
+  background:linear-gradient(150deg,rgba(20,6,55,0.97) 0%,rgba(8,3,28,0.97) 100%);
+  border:1px solid rgba(195,155,255,0.24);
+  border-radius:28px; overflow:hidden;
+  padding:2.6rem 2.8rem 2.4rem;
+  max-width:480px; width:92%;
+  text-align:center;
+  box-shadow:
+    0 0 60px rgba(150,100,255,0.2),
+    0 0 140px rgba(100,55,200,0.1),
+    inset 0 1px 0 rgba(220,190,255,0.08);
+  animation:popIn 0.42s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+#modal-box::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:3px;
+  background:linear-gradient(90deg,transparent,rgba(190,140,255,0.7),transparent);
+}
+.modal-num-wrap {
+  margin-bottom:1.2rem;
+}
+#modal-num-big {
+  display:block;
+  font-family:'Dancing Script',cursive;
+  font-size:4.2rem; font-weight:700;
+  line-height:1;
+  color:rgba(215,185,255,0.95);
+  text-shadow:0 0 40px rgba(185,140,255,0.7), 0 0 80px rgba(140,90,255,0.35);
+  letter-spacing:2px;
+}
+#modal-num-label {
+  display:block;
+  font-family:'Dancing Script',cursive;
+  font-size:0.82rem; letter-spacing:3px;
+  color:rgba(200,165,255,0.48);
+  margin-top:0.3rem;
+  text-transform:uppercase;
+}
+.modal-divider {
+  width:52px; height:1px; margin:0.4rem auto 1.6rem;
+  background:linear-gradient(90deg,transparent,rgba(200,165,255,0.45),transparent);
+}
+#modal-text {
+  font-family:'Dancing Script',cursive;
+  color:#f2ecff;
+  font-size:clamp(1.25rem, 3.5vw, 1.65rem);
+  line-height:1.62;
+  font-style:italic;
+  text-shadow:0 0 25px rgba(185,150,255,0.3);
+  padding:0 0.5rem;
+}
+.modal-sparkles {
+  margin:1.2rem 0 0;
+  color:rgba(200,170,255,0.35);
+  font-size:0.75rem; letter-spacing:6px;
+}
+.modal-continue {
+  margin-top:1.6rem; padding:0.6rem 2rem;
+  background:transparent;
+  border:1px solid rgba(190,150,255,0.35);
+  color:#c8aaff; font-family:'Dancing Script',cursive;
+  font-size:0.95rem; cursor:pointer; border-radius:100px;
+  transition:all 0.28s ease;
+}
+.modal-continue:hover, .modal-continue:active {
+  background:rgba(190,150,255,0.12);
+  border-color:rgba(220,185,255,0.6);
+}
+
+/* ── SUN MODAL ────────────────────────────────────────── */
+#sun-box {
+  position:relative;
+  background:linear-gradient(150deg,rgba(46,10,4,0.97) 0%,rgba(12,4,2,0.97) 100%);
+  border:1px solid rgba(255,190,80,0.3);
+  border-radius:28px; overflow:hidden;
+  padding:3rem 3rem 2.6rem;
+  max-width:480px; width:92%; text-align:center;
+  box-shadow:0 0 70px rgba(255,160,30,0.22), 0 0 160px rgba(255,100,20,0.1), inset 0 1px 0 rgba(255,220,100,0.08);
+  animation:popIn 0.42s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+#sun-box::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,transparent,rgba(255,190,80,0.7),transparent);
+}
+#sun-icon {
+  font-size:2.8rem; margin-bottom:1.2rem;
+  animation:spinSlow 12s linear infinite;
+  display:inline-block;
+}
+#sun-text {
+  font-family:'Dancing Script',cursive; color:#fff5e0;
+  font-size:clamp(1.65rem, 4.5vw, 2.2rem); line-height:1.52;
+  text-shadow:0 0 25px rgba(255,205,80,0.65), 0 0 60px rgba(255,155,30,0.3);
+  margin-bottom:2rem;
+}
+#sun-link {
+  display:inline-block; padding:0.85rem 2.4rem;
+  background:linear-gradient(135deg,rgba(255,190,55,0.18),rgba(255,105,30,0.14));
+  border:1px solid rgba(255,190,55,0.42);
+  color:#ffe8b0; font-family:'Dancing Script',cursive;
+  font-size:1.08rem; text-decoration:none; border-radius:100px;
+  transition:all 0.32s ease; position:relative; overflow:hidden;
+}
+#sun-link::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,200,0.08),transparent);
+  transform:translateX(-100%); transition:transform 0.6s ease;
+}
+#sun-link:hover::after { transform:translateX(100%); }
+#sun-link:hover, #sun-link:active {
+  background:rgba(255,190,55,0.28);
+  box-shadow:0 0 32px rgba(255,190,55,0.28);
+}
+
+/* ── HINT ─────────────────────────────────────────────── */
+#hint {
+  position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%);
+  color:rgba(195,158,255,0.46); font-family:'Dancing Script',cursive;
+  font-size:clamp(0.78rem,2.2vw,0.9rem); pointer-events:none; display:none;
+  white-space:nowrap; animation:pulse 2.6s ease-in-out infinite;
+}
+
+/* ── KEYFRAMES ───────────────────────────────────────── */
+@keyframes popIn    { from{opacity:0;transform:scale(0.82) translateY(10px);} to{opacity:1;transform:scale(1) translateY(0);} }
+@keyframes pulse    { 0%,100%{opacity:0.25;} 50%{opacity:0.78;} }
+@keyframes spinSlow { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+@keyframes twinkle  { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+/* ── MOBILE ──────────────────────────────────────────── */
+@media (max-width:600px) {
+  #modal-box, #sun-box { padding:2rem 1.6rem 1.8rem; border-radius:22px; }
+  #modal-num-big { font-size:3.2rem; }
+  #sun-text { font-size:1.5rem; }
+  #sun-icon { font-size:2.2rem; }
+  .modal-x { width:32px; height:32px; font-size:0.9rem; top:0.7rem; right:0.7rem; }
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<!-- ── INTRO ─────────────────────────────────────── -->
+<div id="intro">
+  <canvas id="ip"></canvas>
+  <div id="intro-content">
+    <div id="intro-deco">✦ · · · ✦ · · · ✦</div>
+    <div id="intro-lines"></div>
+    <div id="intro-actions">
+      <button type="button" id="intro-btn" onclick="startJourney()">✦ Enter the Universe ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── REASON MODAL ───────────────────────────────── -->
+<div id="modal" class="m-overlay">
+  <div id="modal-box">
+    <button type="button" class="modal-x" onclick="closeModal()">✕</button>
+    <div class="modal-num-wrap">
+      <span id="modal-num-big">01</span>
+      <span id="modal-num-label">reason i love about you</span>
+    </div>
+    <div class="modal-divider"></div>
+    <div id="modal-text"></div>
+    <div class="modal-sparkles">✦ &nbsp; ✦ &nbsp; ✦</div>
+    <button type="button" class="modal-continue" onclick="closeModal()">✦ carry on ✦</button>
+  </div>
+</div>
+
+<!-- ── SUN MODAL ──────────────────────────────────── -->
+<div id="sun-modal" class="m-overlay">
+  <div id="sun-box">
+    <button type="button" class="modal-x" onclick="closeSunModal()">✕</button>
+    <div id="sun-icon">☀</div>
+    <div id="sun-text">I love you,<br>to infinity and beyond. ✦</div>
+    <a id="sun-link" href="https://zidi.my.canva.site/" target="_blank" rel="noopener noreferrer">✦ Open Your Gift ✦</a>
+  </div>
+</div>
+
+<div id="hint"></div>
+
+<!-- ── THREE.JS ───────────────────────────────────── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script>
+'use strict';
+
+// ── REASONS ──────────────────────────────────────────────────────────────────
+const REASONS = [
+  "Your dimples",
+  "The way you are with Abdullah",
+  "The way you make sure I eat and I'm doing okay",
+  "The first message every day I get up",
+  "Ur muskle hehhehhe",
+  "How tall you are and how I fit right in with you",
+  "The way you make me feel like home and protected",
+  "The way you sing the honeybunch song",
+  "The way you ran after me with the umbrella",
+  "The way u put the food on my plate first and make sure I eat",
+  "The way you come early so I'm never akele",
+  "The way I'm completely in love with the entirety of you",
+  "The way our legs touch and the mini ways u come closer to me",
+  "My fingerprint on your phone and in your heart",
+  "The way u say jonsa hai loll",
+  "Literally whatever you say is all so cute",
+  "Your hands that I just want to hold",
+  "The way you're so in control of me and yourself and not letting me slip up",
+  "The way you show up for everyone",
+  "The way you think about your parents and siblings",
+  "The way u look at me, in pictures and in real life",
+  "The tang karna which is so cute",
+  "The way you're MINE."
+];
+
+// ── INTRO: PARTICLE CANVAS ────────────────────────────────────────────────────
+(function initIntroParticles() {
+  const cv  = document.getElementById('ip');
+  const ctx = cv.getContext('2d');
+  let W, H, particles;
+
+  function resize() {
+    W = cv.width  = window.innerWidth;
+    H = cv.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  particles = Array.from({ length: 90 }, () => ({
+    x:  Math.random() * window.innerWidth,
+    y:  Math.random() * window.innerHeight,
+    r:  0.6 + Math.random() * 2.4,
+    vx: (Math.random() - 0.5) * 0.28,
+    vy: (Math.random() - 0.5) * 0.28,
+    ph: Math.random() * Math.PI * 2,
+    sp: 0.35 + Math.random() * 1.1,
+    hu: 220 + Math.random() * 95,
+    isStar: Math.random() < 0.28,
+  }));
+
+  let running = true;
+  function draw() {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    const now = Date.now() / 1000;
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -5) p.x = W + 5;
+      if (p.x > W + 5) p.x = -5;
+      if (p.y < -5) p.y = H + 5;
+      if (p.y > H + 5) p.y = -5;
+
+      const a = 0.15 + 0.85 * Math.pow(Math.abs(Math.sin(now * p.sp + p.ph)), 2.2);
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.fillStyle = `hsl(${p.hu},80%,78%)`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+      if (p.isStar && p.r > 1.2) {
+        ctx.strokeStyle = `hsl(${p.hu},70%,85%)`;
+        ctx.lineWidth = 0.6;
+        ctx.globalAlpha = a * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(p.x - p.r * 2.8, p.y); ctx.lineTo(p.x + p.r * 2.8, p.y);
+        ctx.moveTo(p.x, p.y - p.r * 2.8); ctx.lineTo(p.x, p.y + p.r * 2.8);
+        ctx.stroke();
+      }
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Stop particle loop once intro is gone (save battery)
+  document.getElementById('intro-btn').addEventListener('click', () => {
+    setTimeout(() => { running = false; }, 1400);
+  }, { once: true });
+})();
+
+// ── INTRO: LINE-BY-LINE TEXT REVEAL ──────────────────────────────────────────
+(function revealIntroText() {
+  const LINES = [
+    { t:'They say the universe is endless,', gap:false },
+    { t:'but somehow it still led me to you.', gap:false },
+    { t:'', gap:true },
+    { t:'So for your 23rd orbit around the sun,', gap:false },
+    { t:'I turned this galaxy into a map', gap:false },
+    { t:'of everything I adore about you.', gap:false },
+    { t:'', gap:true },
+    { t:'Every flickering star holds a reason.', gap:false },
+    { t:'Every tiny planet carries a memory.', gap:false },
+    { t:'', gap:true },
+    { t:'And somewhere between the stardust', gap:false },
+    { t:'and constellations,', gap:false },
+    { t:'you\'ll find how deeply you are loved.', gap:false },
+    { t:'', gap:true },
+    { t:'Click the stars, birthday boy.', gap:false },
+    { t:'Take your time wandering through the universe.', gap:false },
+    { t:'', gap:true },
+    { t:'After all,', gap:false },
+    { t:'you are the center of mine. ✦', gap:false },
+  ];
+
+  const container = document.getElementById('intro-lines');
+  LINES.forEach((line, i) => {
+    const el = document.createElement('div');
+    el.className = line.gap ? 'il-gap' : 'il';
+    if (!line.gap) el.textContent = line.t;
+    container.appendChild(el);
+
+    if (!line.gap) {
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.75s ease, transform 0.75s ease';
+        el.style.opacity    = '1';
+        el.style.transform  = 'translateY(0)';
+      }, 200 + i * 155);
+    }
+  });
+
+  // Reveal button after all lines
+  setTimeout(() => {
+    const actions = document.getElementById('intro-actions');
+    actions.style.transition = 'opacity 1s ease, transform 0.85s ease';
+    actions.style.opacity    = '1';
+    actions.style.transform  = 'translateY(0)';
+  }, 200 + LINES.length * 155 + 400);
+})();
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let journeyStarted = false;
+let currentStar    = 0;
+let modalOpen      = false;
+let elapsedTime    = 0;
+
+const starSpawnTimes = new Array(23).fill(-9999);
+const lineSpawnTimes = new Array(23).fill(-9999);
+
+// ── RENDERER ──────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene  = new THREE.Scene();
+scene.background = new THREE.Color(0x010008);
+
+const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 600);
+
+function setCameraForAspect() {
+  const portrait = window.innerWidth < window.innerHeight;
+  camera.fov = portrait ? 72 : 55;
+  camera.position.z = portrait ? 42 : 34;
+  camera.updateProjectionMatrix();
+}
+setCameraForAspect();
+camera.position.y = 2;
+
+scene.add(new THREE.AmbientLight(0x0a0820, 1.8));
+const dir = new THREE.DirectionalLight(0xffeedd, 0.5);
+dir.position.set(6, 10, 8);
+scene.add(dir);
+
+// ── GLOW TEXTURE ─────────────────────────────────────────────────────────────
+function mkGlow(size, r, g, b) {
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = size;
+  const ctx = cv.getContext('2d');
+  const gr  = ctx.createRadialGradient(size/2,size/2,0, size/2,size/2,size/2);
+  gr.addColorStop(0,    `rgba(${r},${g},${b},1)`);
+  gr.addColorStop(0.32, `rgba(${r},${g},${b},0.52)`);
+  gr.addColorStop(0.68, `rgba(${r},${g},${b},0.14)`);
+  gr.addColorStop(1,    'rgba(0,0,0,0)');
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, size, size);
+  return new THREE.CanvasTexture(cv);
+}
+const starGlowTex   = mkGlow(64,  210, 190, 255);
+const activeGlowTex = mkGlow(96,  255, 255, 255);
+const sunGlowTex    = mkGlow(128, 255, 195, 55);
+
+// ── TWINKLING STARS (GLSL shader, per-vertex) ─────────────────────────────────
+function createTwinkleStars() {
+  const N   = 4200;
+  const pos = new Float32Array(N * 3);
+  const off = new Float32Array(N);
+  const sz  = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    const r = 110 + Math.random() * 230;
+    const t = Math.random() * Math.PI * 2;
+    const p = Math.acos(2 * Math.random() - 1);
+    pos[i*3]   = r * Math.sin(p) * Math.cos(t);
+    pos[i*3+1] = r * Math.sin(p) * Math.sin(t);
+    pos[i*3+2] = r * Math.cos(p);
+    off[i] = Math.random() * Math.PI * 2;
+    sz[i]  = 0.38 + Math.random() * 3.4;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('aOff',     new THREE.BufferAttribute(off, 1));
+  geo.setAttribute('aSize',    new THREE.BufferAttribute(sz,  1));
+
+  const mat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      attribute float aOff; attribute float aSize; uniform float uTime; varying float vA;
+      void main() {
+        float tw = 0.18 + 0.82 * pow(abs(sin(uTime * 0.9 + aOff)), 2.6);
+        vA = tw;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = aSize * tw * (188.0 / -mv.z);
+        gl_Position  = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: `
+      varying float vA;
+      void main() {
+        vec2 uv = gl_PointCoord - 0.5; float d = length(uv);
+        if (d > 0.5) discard;
+        gl_FragColor = vec4(1.0, 0.95, 0.9, (1.0 - d*2.0) * vA);
+      }
+    `,
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+  });
+  return new THREE.Points(geo, mat);
+}
+
+// ── GALAXY (3 spiral arms + halo, inner void r < 9) ──────────────────────────
+function createGalaxy() {
+  const DISK = 22000, HALO = 4000, N = DISK + HALO;
+  const pos  = new Float32Array(N * 3);
+  const col  = new Float32Array(N * 3);
+  const cC   = new THREE.Color(0xffcc66);
+  const cM   = new THREE.Color(0xcc88ff);
+  const cR   = new THREE.Color(0x2244dd);
+  const cP   = new THREE.Color(0xff55aa);
+
+  for (let i = 0; i < DISK; i++) {
+    const arm  = i % 3;
+    const aAng = arm * (Math.PI * 2 / 3);
+    const r    = 9 + Math.pow(Math.random(), 0.44) * 92;
+    const spin = r * 0.27;
+    const sc   = Math.pow(Math.random(), 2.2) * 5.8;
+    const sA   = Math.random() * Math.PI * 2;
+    pos[i*3]   = Math.cos(aAng + spin) * r + Math.cos(sA) * sc;
+    pos[i*3+1] = (Math.random() - 0.5) * (0.55 + r * 0.019);
+    pos[i*3+2] = Math.sin(aAng + spin) * r + Math.sin(sA) * sc;
+    const t = (r - 9) / 92;
+    const c = arm === 2 ? cP.clone().lerp(cR, t * 0.8) : cC.clone().lerp(t < 0.5 ? cM : cR, t);
+    col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b;
+  }
+  for (let i = DISK; i < N; i++) {
+    const r = 55 + Math.random() * 130;
+    const t = Math.random() * Math.PI * 2;
+    const p = Math.acos(2 * Math.random() - 1);
+    pos[i*3]   = r * Math.sin(p) * Math.cos(t);
+    pos[i*3+1] = r * Math.sin(p) * Math.sin(t);
+    pos[i*3+2] = r * Math.cos(p);
+    const b = 0.5 + Math.random() * 0.5;
+    col[i*3] = b*0.72; col[i*3+1] = b*0.86; col[i*3+2] = b;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(col, 3));
+  const mat = new THREE.PointsMaterial({
+    size:0.19, vertexColors:true, transparent:true, opacity:0.82,
+    sizeAttenuation:true, depthWrite:false, blending:THREE.AdditiveBlending,
+  });
+  const g = new THREE.Points(geo, mat);
+  g.rotation.x = -0.48; g.rotation.z = 0.12;
+  return g;
+}
+
+// ── NEBULA CLOUDS ─────────────────────────────────────────────────────────────
+function createNebula() {
+  const g = new THREE.Group();
+  [
+    [100,50,180, -30,-15,-38, 55, 0.068],
+    [60,30,200,   34, 10,-42, 68, 0.050],
+    [180,40,100, -10, 22,-29, 44, 0.058],
+    [50,80,160,   22,-22,-52, 78, 0.040],
+    [120,50,220,   5,  5,-21, 37, 0.052],
+    [200,110,60, -26, -8,-46, 58, 0.034],
+  ].forEach(([r,gg,b,x,y,z,s,o]) => {
+    const sm = new THREE.SpriteMaterial({ map:mkGlow(128,r,gg,b), transparent:true, opacity:o, blending:THREE.AdditiveBlending, depthWrite:false });
+    const sp = new THREE.Sprite(sm);
+    sp.scale.set(s,s,1); sp.position.set(x,y,z);
+    g.add(sp);
+  });
+  return g;
+}
+
+// ── HEART POSITIONS ───────────────────────────────────────────────────────────
+const HS = 0.52, HY = 2.6 * HS;
+function heartXY(t) {
+  return { x: 16*Math.pow(Math.sin(t),3), y: 13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t) };
+}
+const heartPos = Array.from({length:23}, (_,i) => {
+  const { x, y } = heartXY((i/23)*Math.PI*2);
+  return new THREE.Vector3(x*HS, y*HS+HY, 0);
+});
+
+// ── HEART CONSTELLATION ───────────────────────────────────────────────────────
+function createHeart() {
+  const group    = new THREE.Group();
+  const meshes   = [], glowMats = [], hitZones = [], lineSegs = [];
+
+  for (let i = 0; i < 23; i++) {
+    const mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.30, 18, 18),
+      new THREE.MeshStandardMaterial({ color:0xffffff, emissive:new THREE.Color(0.3,0.42,1.0), emissiveIntensity:0.15, roughness:0.04 })
+    );
+    mesh.position.copy(heartPos[i]);
+    mesh.visible = false;
+    mesh.userData.twOff = Math.random() * Math.PI * 2;
+    group.add(mesh);
+    meshes.push(mesh);
+
+    // Per-star glow sprite
+    const gm = new THREE.SpriteMaterial({ map:starGlowTex, transparent:true, opacity:0.12, blending:THREE.AdditiveBlending, depthWrite:false });
+    const gs = new THREE.Sprite(gm); gs.scale.set(1.8,1.8,1);
+    mesh.add(gs); glowMats.push(gm);
+
+    // Invisible larger hit zone for easy tapping on mobile
+    const hz = new THREE.Mesh(
+      new THREE.SphereGeometry(0.7, 6, 6),
+      new THREE.MeshBasicMaterial({ visible:false })
+    );
+    mesh.add(hz); hitZones.push(hz);
+  }
+
+  // 23 line segments (all start hidden)
+  for (let i = 0; i < 23; i++) {
+    const j   = (i+1) % 23;
+    const geo = new THREE.BufferGeometry().setFromPoints([heartPos[i].clone(), heartPos[j].clone()]);
+    const mat = new THREE.LineBasicMaterial({ color:0x9977ff, transparent:true, opacity:0, depthWrite:false, blending:THREE.AdditiveBlending });
+    const ln  = new THREE.Line(geo, mat);
+    ln.visible = false;
+    group.add(ln); lineSegs.push(ln);
+  }
+
+  group.visible = false;
+  scene.add(group);
+  return { group, meshes, glowMats, hitZones, lineSegs };
+}
+
+// ── SUN ───────────────────────────────────────────────────────────────────────
+function createSun() {
+  const group = new THREE.Group();
+  const mesh  = new THREE.Mesh(
+    new THREE.SphereGeometry(1.15, 36, 36),
+    new THREE.MeshStandardMaterial({ color:0xffcc44, emissive:new THREE.Color(1.0,0.48,0.0), emissiveIntensity:1.4, roughness:0.28 })
+  );
+  mesh.userData.isSun = true; group.add(mesh);
+
+  const gm = new THREE.SpriteMaterial({ map:sunGlowTex, transparent:true, opacity:0.68, blending:THREE.AdditiveBlending, depthWrite:false });
+  const gs = new THREE.Sprite(gm); gs.scale.set(7.5,7.5,1); group.add(gs);
+
+  const corona = new THREE.Mesh(
+    new THREE.TorusGeometry(1.65,0.055,8,52),
+    new THREE.MeshBasicMaterial({ color:0xffaa22, transparent:true, opacity:0.30, depthWrite:false })
+  );
+  group.add(corona);
+  group.add(new THREE.PointLight(0xff9922, 2.5, 42));
+  group.position.set(0, 0, 0); group.visible = false;
+  scene.add(group);
+  return { group, mesh, mat:mesh.material, glowMat:gm, glowSpr:gs, corona };
+}
+
+// ── BUILD SCENE ───────────────────────────────────────────────────────────────
+const twinkleStars = createTwinkleStars(); scene.add(twinkleStars);
+const galaxy = createGalaxy(); scene.add(galaxy);
+scene.add(createNebula());
+const { group:heartGroup, meshes:heartMeshes, glowMats, hitZones, lineSegs } = createHeart();
+const sunObj = createSun();
+
+const raycaster = new THREE.Raycaster();
+const mouse     = new THREE.Vector2();
+
+// ── STAR ACTIVATION ──────────────────────────────────────────────────────────
+function activateStar(idx) {
+  currentStar = idx;
+
+  heartMeshes.forEach((m, i) => {
+    if (i <= idx && !m.visible) {
+      m.visible = true;
+      starSpawnTimes[i] = elapsedTime;
+      if (i === idx) {
+        m.material.emissive.setRGB(1,1,1);
+        m.material.emissiveIntensity = 4.2;
+        glowMats[i].map = activeGlowTex;
+        glowMats[i].color.set(0xffffff);
+        glowMats[i].needsUpdate = true;
+      }
+    } else if (i < idx && m.visible) {
+      m.material.emissive.setRGB(0.3,0.42,1.0);
+      m.material.emissiveIntensity = 0.55;
+      glowMats[i].map = starGlowTex;
+      glowMats[i].color.set(0x8888ff);
+      glowMats[i].opacity = 0.22;
+      glowMats[i].needsUpdate = true;
+    }
+  });
+
+  lineSegs.forEach((l, i) => {
+    const show = (i < 22) ? (idx > i) : (idx >= 23);
+    if (show && !l.visible) {
+      l.visible = true;
+      lineSpawnTimes[i] = elapsedTime;
+      l.material.opacity = 0;
+    }
+  });
+
+  if (idx < 23) {
+    sunObj.mat.emissiveIntensity = 0.72;
+    sunObj.glowMat.opacity = 0.30;
+    setHint(`✦ star ${idx+1} of 23 — click the brightest one ✦`);
+  } else {
+    sunObj.mat.emissiveIntensity = 4.2;
+    sunObj.glowMat.opacity = 1.0;
+    setHint('✦ now click the sun ✦');
+  }
+}
+
+function setHint(t) {
+  const h = document.getElementById('hint');
+  h.textContent = t; h.style.display = 'block';
+}
+
+// ── JOURNEY START ─────────────────────────────────────────────────────────────
+function startJourney() {
+  const intro = document.getElementById('intro');
+  intro.style.transition = 'opacity 1.3s ease';
+  intro.style.opacity = '0';
+  setTimeout(() => {
+    intro.style.display = 'none';
+    journeyStarted = true;
+    heartGroup.visible = true;
+    sunObj.group.visible = true;
+    activateStar(0);
+  }, 1300);
+}
+
+// ── POINTER HANDLER (click + touch) ──────────────────────────────────────────
+function handlePointer(cx, cy) {
+  if (!journeyStarted || modalOpen) return;
+  mouse.x =  (cx / window.innerWidth)  * 2 - 1;
+  mouse.y = -(cy / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+
+  if (currentStar < 23) {
+    // Raycast against the invisible hit zone (bigger = easier to tap)
+    if (raycaster.intersectObject(hitZones[currentStar]).length) openReason(currentStar);
+  } else {
+    if (raycaster.intersectObject(sunObj.mesh).length) openSunModal();
+  }
+}
+
+canvas.addEventListener('click', e => handlePointer(e.clientX, e.clientY));
+canvas.addEventListener('touchend', e => {
+  e.preventDefault();
+  const t = e.changedTouches[0];
+  handlePointer(t.clientX, t.clientY);
+}, { passive:false });
+
+canvas.addEventListener('mousemove', e => {
+  if (!journeyStarted || modalOpen) return;
+  mouse.x =  (e.clientX / window.innerWidth)  * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const target = currentStar < 23 ? hitZones[currentStar] : sunObj.mesh;
+  canvas.style.cursor = raycaster.intersectObject(target).length ? 'pointer' : 'default';
+});
+
+// ── MODALS ────────────────────────────────────────────────────────────────────
+function openReason(idx) {
+  modalOpen = true;
+  // Reset animation so it replays cleanly
+  const box = document.getElementById('modal-box');
+  box.style.animation = 'none';
+  void box.offsetWidth;
+  box.style.animation = '';
+
+  document.getElementById('modal-num-big').textContent   = String(idx+1).padStart(2,'0');
+  document.getElementById('modal-num-label').textContent = 'reason i love about you';
+  document.getElementById('modal-text').textContent      = REASONS[idx];
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+  modalOpen = false;
+  // Clear old content only after transition ends
+  setTimeout(() => {
+    if (!modalOpen) {
+      document.getElementById('modal-text').textContent = '';
+      document.getElementById('modal-num-big').textContent = '00';
+    }
+  }, 340);
+  activateStar(currentStar + 1);
+}
+
+function openSunModal() {
+  modalOpen = true;
+  const box = document.getElementById('sun-box');
+  box.style.animation = 'none';
+  void box.offsetWidth;
+  box.style.animation = '';
+  document.getElementById('sun-modal').classList.add('show');
+}
+
+function closeSunModal() {
+  document.getElementById('sun-modal').classList.remove('show');
+  modalOpen = false;
+}
+
+// ── ANIMATION LOOP ────────────────────────────────────────────────────────────
+function easeOut3(x) { return 1 - Math.pow(1 - Math.min(x,1), 3); }
+
+function animate() {
+  requestAnimationFrame(animate);
+  elapsedTime += 0.007;
+
+  twinkleStars.material.uniforms.uTime.value = elapsedTime;
+  galaxy.rotation.y = elapsedTime * 0.032;
+
+  // Heart stars — spawn animation + active pulse
+  heartMeshes.forEach((m, i) => {
+    if (!m.visible) return;
+    const spawnP = easeOut3((elapsedTime - starSpawnTimes[i]) / 0.28);
+    const tw     = Math.sin(elapsedTime * 1.9 + m.userData.twOff);
+
+    if (journeyStarted && i === currentStar && currentStar < 23) {
+      const pulse = 1.78 + 0.22 * Math.sin(elapsedTime * 5.8);
+      m.scale.setScalar(spawnP * pulse);
+      m.material.emissiveIntensity = spawnP * (3.8 + tw * 0.7);
+      glowMats[i].opacity = spawnP * (0.80 + tw * 0.12);
+    } else if (i < currentStar) {
+      m.scale.setScalar(spawnP);
+      m.material.emissiveIntensity = spawnP * (0.52 + tw * 0.14);
+      glowMats[i].opacity = spawnP * 0.22;
+    }
+  });
+
+  // Lines — fade in
+  lineSegs.forEach((l, i) => {
+    if (!l.visible) return;
+    l.material.opacity = easeOut3((elapsedTime - lineSpawnTimes[i]) / 0.38) * 0.48;
+  });
+
+  // Sun
+  if (sunObj.group.visible) {
+    const sp = Math.sin(elapsedTime * 2.8);
+    sunObj.group.rotation.y += 0.006;
+    sunObj.corona.rotation.z -= 0.003;
+    if (currentStar >= 23) {
+      sunObj.mat.emissiveIntensity = 3.5 + sp * 0.9;
+      sunObj.mesh.scale.setScalar(1 + sp * 0.06);
+      sunObj.glowMat.opacity = 0.88 + sp * 0.08;
+      sunObj.glowSpr.scale.set(9 + sp*0.7, 9 + sp*0.7, 1);
+    } else {
+      sunObj.mat.emissiveIntensity = 0.72 + sp * 0.15;
+    }
+  }
+
+  // Camera drift
+  camera.position.x = Math.sin(elapsedTime * 0.038) * 2.5;
+  camera.position.y = 2 + Math.cos(elapsedTime * 0.027) * 1.4;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+// ── RESIZE ────────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  setCameraForAspect();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+</script>
+</body>
+</html>
